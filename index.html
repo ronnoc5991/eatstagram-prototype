@@ -13,6 +13,7 @@ body {
     display: grid;
     grid-template-columns: 20% 80%;
     font-family: 'Permanent Marker', cursive;
+    min-height: 100vh;
 }
 
 #navBar {
@@ -115,6 +116,7 @@ body {
 /* Style the front side (fallback if image is missing) */
 .display-card-front {
   background-color: white;
+  /* background-image: url("../photos/checkerboard-cross.png"); */
   color: black;
   display: grid;
   grid-template-rows: 346px 74px;
@@ -125,6 +127,13 @@ img {
     border: 1px solid black;
     margin-top: 23px;
     justify-self: center;
+    width: 308px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.rotateNinety {
+  transform: rotate(90deg)
 }
 
 .front-text {
