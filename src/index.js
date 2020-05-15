@@ -6,6 +6,8 @@ const formContainer = document.getElementById("formContainer");
 const newCardButton = document.getElementById("newCard");
 newCardButton.addEventListener('click', toggleFormDisplay);
 
+const recipes = [];
+
 function toggleFormDisplay() {
     if (formContainer.className == "hidden") { //if hidden, make active
         cardDisplayContainer.style.opacity = "0.5";
@@ -16,32 +18,47 @@ function toggleFormDisplay() {
     }
 }
 
-// var newRecipe = createARecipe();
-// cardDisplayContainer.appendChild(createDisplayCard(newRecipe));
+function loadRecipeDisplay () {
+    var i;
+    for (i=0; i<recipes.length; ++i) {
+        cardDisplayContainer.appendChild(createDisplayCard(recipes[i]));
+    }
+}
 
-var newRecipe = createARecipe("Pizza", "Pizza ingredients dude", "../photos/pizza.JPG", 1);
-cardDisplayContainer.appendChild(createDisplayCard(newRecipe));
+var newRecipe = createARecipe("Pizza", "Tipo 00 Flour, Yeast, Salt, Water, Time, San Marzano Tomatoes, Mozzarella, Pesto, Basil, Cherry Tomatoes", "../photos/pizza.JPG", 1);
+recipes.push(newRecipe);
 
 var newRecipe = createARecipe("Falafel Wraps", "Falafel, Tzatziki, Tomaten, Cous-Cous, Wraps", "../photos/falafel.JPG", 1);
-cardDisplayContainer.appendChild(createDisplayCard(newRecipe));
-
+recipes.push(newRecipe);
 
 var newRecipe = createARecipe("Rijst Papiers", "Rijst papier, komkommer, wortel, rijst noodles, mango, munt, avocado", "../photos/rijstpapier3.JPG", 1);
-cardDisplayContainer.appendChild(createDisplayCard(newRecipe));
+recipes.push(newRecipe);
 
 var newRecipe = createARecipe("Spaghetti", "Spaghetti, sauce, meatballs, Homemade Garlic Bread", "../photos/spaghetti.JPG", 1);
-cardDisplayContainer.appendChild(createDisplayCard(newRecipe));
+recipes.push(newRecipe);
 
 var newRecipe = createARecipe("Quiche", "Lots of Groente, Liefde", "../photos/quiche.JPG", 1);
-cardDisplayContainer.appendChild(createDisplayCard(newRecipe));
+recipes.push(newRecipe);
 
 var newRecipe = createARecipe("Cookout", "Meat, Turksbrood, salade", "../photos/cookout.JPG", 1);
-cardDisplayContainer.appendChild(createDisplayCard(newRecipe));
+recipes.push(newRecipe);
 
 var newRecipe = createARecipe("Lemon Pasta", "Pasta, Lemon, Butter, Pepper, Oil", "../photos/lemon-pasta.JPG", 1);
-cardDisplayContainer.appendChild(createDisplayCard(newRecipe));
+recipes.push(newRecipe);
 
+var newRecipe = createARecipe("Chicken Parmigiana", "Chicken Breast, Egg, Panko, Parm, Seasonings, Pasta, Red Sauce", "../photos/chicken-parm.JPG", 1);
+recipes.push(newRecipe);
 
+var newRecipe = createARecipe("Chicken Burger", "Chicken Breast, Seasonings, Bun, BBQ Sauce", "../photos/chicken-burger.JPG", 1);
+recipes.push(newRecipe);
+
+var newRecipe = createARecipe("Lasagna", "Ricotta, Red Sauce, Lasagna Sheets, Egg, Parm, Seasonings, Mozzarella", "../photos/lasagna.JPG", 1);
+recipes.push(newRecipe);
+
+var newRecipe = createARecipe("Risotto", "Arborio Rice, Onion, Garlic, Olive Oil, Tomato Paste, Canned Tomatoes, Mozzarella, Basil, Cherry Tomatoes", "../photos/risotto.JPG", 1);
+recipes.push(newRecipe);
+
+loadRecipeDisplay();
 
 
 
