@@ -7,6 +7,10 @@
     <title>Eatstagram</title>
 </head>
 <style>
+:root {
+  --red: #C6001D;
+  --yellow: #FFEF00;
+}
 body {
     background-color: #FFFFFF;
     margin: 0;
@@ -24,11 +28,27 @@ body {
     width: 20%;
     position: fixed;
     text-align: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 6fr;
 }
 
 #logo-div {
   /* margin:auto; */
   width: 100%;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+#newCard{
+  grid-row-start: 2;
+  grid-row-end: 3;
+  margin: auto;
+}
+
+#randomCard{
+  grid-row-start: 3;
+  grid-row-end: 4;
+  margin: auto;
 }
 
 #displayContainer {
@@ -92,8 +112,10 @@ body {
 
 .display-card {
   background-color: transparent;
-  width: 345px;
-  height: 420px;
+  /* width: 345px;
+  height: 420px; */
+  width: 276px;
+  height: 336px;
   perspective: 1000px;
   margin: 20px;
 }
@@ -128,17 +150,21 @@ body {
   background-image: url("https://www.transparenttextures.com/patterns/cream-pixels.png");
   color: black;
   display: grid;
-  grid-template-rows: 346px 74px;
+  /* grid-template-rows: 346px 74px; */
+  grid-template-rows: 277px 59px;
   text-align: center;
   border-radius: 2px;
 }
 
 .display-card-front img {
     /* border: 1px solid black; */
-    margin-top: 23px;
+    /* margin-top: 23px; */
+    margin-top: 18px;
     justify-self: center;
-    width: 308px;
-    height: 300px;
+    /* width: 308px;
+    height: 300px; */
+    width: 246px;
+    height: 240px;
     object-fit: cover;
 }
 
@@ -155,8 +181,10 @@ body {
 .display-card-back {
   background-color: white;
   color: black;
-  height: 420px;
-  width: 345px;
+  /* height: 420px;
+  width: 345px; */
+  height: 336px;
+  width: 276px;
   transform: rotateY(180deg);
   text-align: center;
   border-radius: 2px;
@@ -182,6 +210,16 @@ body {
   display: grid;
   grid-template-rows: 346px 74px;
   text-align: center;
+  justify-content: center;
+}
+
+.display-card-front-demo img {
+    /* border: 1px solid black; */
+    margin-top: 23px;
+    justify-self: center;
+    width: 308px;
+    height: 300px;
+    object-fit: cover;
 }
 
 .front-text-demo {
@@ -207,7 +245,8 @@ body {
         </div>
         <!-- logo -->
         <!-- buttons -->
-        <button id="newCard">New Recipe</button>
+        <button id="newCard">Add a New Recipe</button>
+        <button id="randomCard">What should I eat?</button>
     </div>
 
     <div id="displayContainer">
@@ -224,7 +263,7 @@ body {
           <div class="display-card-demo">
             <div class="display-card-front-demo">
               <img src="https://source.unsplash.com/random/308x300" alt="">
-              <div class="front-text-demo"><h1>Dude</h1></div>
+              <div class="front-text-demo"><h1>New Recipe</h1></div>
             </div>
           </div>
 
@@ -233,6 +272,10 @@ body {
           </div>
 
         </div>
+
+      </div>
+
+      <div id="randomRecipeDisplay" class="hidden">
 
       </div>
 

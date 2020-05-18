@@ -1,10 +1,13 @@
 import createDisplayCard from './display-card-factory.js'
 import createARecipe from './recipe-factory.js'
+const _ = require('lodash');
 
 const cardDisplayContainer = document.getElementById("cardDisplayContainer");
 const formContainer = document.getElementById("formContainer");
 const newCardButton = document.getElementById("newCard");
 newCardButton.addEventListener('click', toggleFormDisplay);
+const randomCardButton = document.getElementById("randomCard");
+randomCardButton.addEventListener('click', displayRandomCard);
 
 const recipes = [];
 
@@ -23,7 +26,16 @@ function loadRecipeDisplay () {
     for (i=0; i<recipes.length; ++i) {
         cardDisplayContainer.appendChild(createDisplayCard(recipes[i]));
     }
+    //does not account for preexisting recipes to be on screen
+    //need to remove them before attaching new recipe?
 }
+
+function displayRandomCard () {
+    var randomRecipe = _.sample(recipes);
+    console.log(randomRecipe.name);
+    //toggle display of this form and populate it with the object returned from the recipes array
+}
+
 
 var newRecipe = createARecipe("Pizza", "Tipo 00 Flour, Yeast, Salt, Water, Time, San Marzano Tomatoes, Mozzarella, Pesto, Basil, Cherry Tomatoes", "../photos/pizza.JPG", 1);
 recipes.push(newRecipe);
@@ -58,11 +70,16 @@ recipes.push(newRecipe);
 var newRecipe = createARecipe("Risotto", "Arborio Rice, Onion, Garlic, Olive Oil, Tomato Paste, Canned Tomatoes, Mozzarella, Basil, Cherry Tomatoes", "../photos/risotto.JPG", 1);
 recipes.push(newRecipe);
 
+var newRecipe = createARecipe("Fritata", "Eieren, Feta, Potato, Ui, Knoflook", "../photos/Fritata.jpeg", 1);
+recipes.push(newRecipe);
+
+var newRecipe = createARecipe("Tortilla", "Patatas, Cebolla, Huevos, Amor", "../photos/tortilla.JPG", 1);
+recipes.push(newRecipe);
+
 loadRecipeDisplay();
 
 
 
-// needs a logo
 //needs an add recipe form that can take photos
 //needs a random recipe feature that pulls up a random recipe
 //how does it pull it up?  Can you click on a photo to make it larger?
