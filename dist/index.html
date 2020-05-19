@@ -12,12 +12,12 @@
   --yellow: #FFEF00;
 }
 body {
-    background-color: #FFFFFF;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 20% 80%;
-    font-family: 'Permanent Marker', cursive;
-    min-height: 100vh;
+  background-color: #FFFFFF;
+  margin: 0;
+  display: grid;
+  grid-template-rows: 10vh 1fr;
+  font-family: 'Permanent Marker', cursive;
+  min-height: 100vh;
 }
 
 button {
@@ -39,40 +39,34 @@ button:hover {
 }
 
 #navBar {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    background-color: #FBFBFB;
-    height: 100vh;
-    width: 20%;
-    position: fixed;
-    text-align: center;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr 6fr;
-}
-
-#logo-div {
-  /* margin:auto; */
-  width: 100%;
   grid-row-start: 1;
   grid-row-end: 2;
+  background-color: #FBFBFB;
+  width: 100vw;
+  position: fixed;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 3fr 3fr;
+  z-index: 3;
 }
 
+/* #logo-div {
+} */
+
 #newCard{
-  grid-row-start: 2;
-  grid-row-end: 3;
+  width: 30%;
   margin: auto;
 }
 
 #randomCard{
-  grid-row-start: 3;
-  grid-row-end: 4;
   margin: auto;
+  width: 30%;
 }
 
 #displayContainer {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    position: relative;
+  position: relative;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 
 #cardDisplayContainer {
@@ -84,22 +78,20 @@ button:hover {
 }
 
 #formContainer {
-  position: absolute;
+  position: fixed;
   background-color: transparent;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  height: 90vh;
+  width: 100%;
   display: grid;
-  grid-template-rows: 250px 500px;
+  grid-template-rows: 200px 500px;
 }
 
 /* ------------------------------------ Random Recipe Display ------------------------------------ */
 
 #randomRecipeDisplay {
-  position: absolute;
+  position: fixed;
   background-color: transparent;
-  height: 100vh;
+  height: 90vh;
   width: 100%;
   display: grid;
   grid-template-rows: 1fr 4fr 1fr;
@@ -136,12 +128,20 @@ button:hover {
 }
 
 #random-recipe-display-card-front {
-  margin: auto;
-  transform: translate(-70%);
+  margin: 20px auto;
+  transition: transform 500ms 1000ms;
+}
+
+.translate-left {
+  transform: translateX(-70%);
 }
 
 #random-recipe-display-card-back {
   margin: auto;
+  transition: transform 500ms 1000ms;
+}
+
+.translate-right {
   transform: translateX(70%);
 }
 
@@ -157,10 +157,12 @@ button:hover {
 
 #another-random-recipe-button {
   margin: auto;
+  flex-basis: 30%;
 }
 
 #exit-random-recipe-button {
   margin: auto;
+  flex-basis: 30%;
 }
 
 .hidden {
@@ -176,7 +178,6 @@ button:hover {
 #cardCreatorFormContainer {
   grid-row-start: 1;
   grid-row-end: 2;
-  /* background-color: red; */
   display: flex;
 }
 
@@ -190,7 +191,6 @@ button:hover {
 #cardCreatorDisplay {
   grid-row-start: 2;
   grid-row-end: 3;
-  /* background-color: blue; */
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -244,8 +244,6 @@ button:hover {
 }
 
 .display-card-front img {
-    /* border: 1px solid black; */
-    /* margin-top: 23px; */
     margin-top: 18px;
     justify-self: center;
     /* width: 308px;
@@ -295,18 +293,36 @@ button:hover {
   height: 100%;
   width: 100%;
   display: grid;
+  background-image: url("https://www.transparenttextures.com/patterns/cream-pixels.png");
   grid-template-rows: 346px 74px;
   text-align: center;
   justify-content: center;
+  position: relative;
 }
 
 .display-card-front-demo img {
-    /* border: 1px solid black; */
     margin-top: 23px;
     justify-self: center;
     width: 308px;
     height: 300px;
     object-fit: cover;
+}
+
+.polaroid-development {
+  margin-top: 19px;
+  justify-self: center;
+  width: 300px;
+  height: 308px;
+  opacity: 1;
+  position: absolute;
+  background-color: black;
+  z-index: 2;
+  transition: all 2000ms;
+}
+
+.develop {
+  opacity: 0;
+  background-color: white;
 }
 
 .front-text-demo {
@@ -330,8 +346,6 @@ button:hover {
         <div id='logo-div'>
           <img src="../photos/eatstagram-logo.png" alt="">
         </div>
-        <!-- logo -->
-        <!-- buttons -->
         <button id="newCard">Add a New Recipe</button>
         <button id="randomCard">What should I eat?</button>
     </div>
@@ -371,6 +385,7 @@ button:hover {
           <div id="front-container">
             <div class="display-card-demo" id="random-recipe-display-card-front">
               <div class="display-card-front-demo" id="random-recipe-front">
+                <div class="polaroid-development" id="polaroid-development"></div>
                 <img id="random-recipe-image" alt=""> 
                 <div class="front-text-demo" id="random-recipe-name"></div>
               </div>
@@ -384,7 +399,7 @@ button:hover {
           </div>
         </div>
         <div id="random-display-button-container">
-          <button id="another-random-recipe-button">Hmmmm... Got any other ideas?</button>
+          <button id="another-random-recipe-button">Hmmmm... Any other ideas?</button>
           <button id="exit-random-recipe-button">Great! Thanks!</button>
         </div>
         

@@ -4,6 +4,9 @@ const _ = require('lodash');
 
 const cardDisplayContainer = document.getElementById("cardDisplayContainer");
 const formContainer = document.getElementById("formContainer");
+const randomRecipeFront = document.getElementById("random-recipe-display-card-front");
+const randomRecipeBack = document.getElementById("random-recipe-display-card-back");
+const photoDevelopmentDiv = document.getElementById("polaroid-development");
 const newCardButton = document.getElementById("newCard");
 newCardButton.addEventListener('click', toggleFormDisplay);
 const randomCardContainer = document.getElementById("randomRecipeDisplay");
@@ -38,14 +41,17 @@ function loadRecipeDisplay () {
 
 function toggleRandomDisplay () {
     formContainer.className = "hidden"; //hide other container
+    randomRecipeFront.classList.toggle("translate-left");
+    randomRecipeBack.classList.toggle("translate-right");
+    photoDevelopmentDiv.classList.toggle("develop");
     if (randomCardContainer.className === "hidden") {
-        cardDisplayContainer.style.opacity = "0.2";
+        cardDisplayContainer.style.opacity = "0.1";
         randomCardContainer.className = "active";
+        displayRandomCard();
     } else if (randomCardContainer.className === "active") {
         cardDisplayContainer.style.opacity = "1";
         randomCardContainer.className = "hidden";
     }
-    displayRandomCard();
 }
 
 function displayRandomCard () {
@@ -114,12 +120,8 @@ loadRecipeDisplay();
 
 
 //needs an add recipe form that can take photos
-//how does it pull it up?  Can you click on a photo to make it larger?
+//how does it pull it up?  Can you click on a photo to make it larger? // can copy random recipe div and populate it with recipe information on button click
+//add buttons to the photos
 //can we add several photos and scroll through them?
 //tag features like a blog?  tag by lunch/dinner/italian/soup/vegetables etc.
 //make different display options... one should be grid display... other should be photo carousel
-
-//add development of polaroid picture effect... fade from black or purple?
-//on random recipe load... random polaroid should appear in the middle... and split into front and back on the left and right of screen
-//add slide left and flip right classes/animations to the random card display
-//photots are not equal on the y plane right now... fix this
