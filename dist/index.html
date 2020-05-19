@@ -76,6 +76,43 @@ body {
   grid-template-rows: 250px 500px;
 }
 
+#randomRecipeDisplay {
+  position: absolute;
+  background-color: transparent;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 4fr;
+}
+
+#random-recipe-title {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin: auto;
+}
+
+#random-recipe-title h1 {
+  font-size: 50px;
+}
+
+#random-recipe-display-card {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#random-recipe-information {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  margin-top: 150px;
+}
+
 .hidden {
   opacity: 0;
   z-index: -1;
@@ -275,9 +312,22 @@ body {
 
       </div>
 
+
       <div id="randomRecipeDisplay" class="hidden">
 
+        <div id="random-recipe-title"><h1>You should eat...</h1></div>
+
+        <div class="display-card-demo" id="random-recipe-display-card">
+          <div class="display-card-front-demo" id="random-recipe-front">
+            <img id="random-recipe-image" alt=""> 
+            <div class="front-text-demo" id="random-recipe-name"></div>
+          </div>
+        </div>
+
+        <div id="random-recipe-information"></div>
+
       </div>
+
 
       <!-- think about putting these into another div -->
       <div id="cardDisplayContainer">

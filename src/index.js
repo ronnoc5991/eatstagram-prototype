@@ -6,14 +6,16 @@ const cardDisplayContainer = document.getElementById("cardDisplayContainer");
 const formContainer = document.getElementById("formContainer");
 const newCardButton = document.getElementById("newCard");
 newCardButton.addEventListener('click', toggleFormDisplay);
+const randomCardContainer = document.getElementById("randomRecipeDisplay");
 const randomCardButton = document.getElementById("randomCard");
 randomCardButton.addEventListener('click', displayRandomCard);
 
 const recipes = [];
 
 function toggleFormDisplay() {
+    randomCardContainer.className = "hidden";
     if (formContainer.className == "hidden") { //if hidden, make active
-        cardDisplayContainer.style.opacity = "0.5";
+        cardDisplayContainer.style.opacity = "0.2";
         formContainer.className = "active";
     } else if (formContainer.className == "active") { //if active, make hidden
         cardDisplayContainer.style.opacity = "1";
@@ -31,9 +33,33 @@ function loadRecipeDisplay () {
 }
 
 function displayRandomCard () {
+    formContainer.className = "hidden";
+    if (randomCardContainer.className === "hidden") {
+        cardDisplayContainer.style.opacity = "0.2";
+        randomCardContainer.className = "active";
+    } else if (randomCardContainer.className === "active") {
+        cardDisplayContainer.style.opacity = "1";
+        randomCardContainer.className = "hidden";
+    }
     var randomRecipe = _.sample(recipes);
+    const randomRecipeCardFront = document.getElementById("random-recipe-front");
+    const randomRecipeImage = document.getElementById('random-recipe-image')
+    randomRecipeImage.src = `${randomRecipe.imageLink}`;
+    if (randomRecipe.rotate == 1) {
+        if (randomRecipeImage.className == 'rotateNinety') {
+
+        } else {
+            randomRecipeImage.className += 'rotateNinety';
+        }
+    } else {
+        randomRecipeImage.className -= 'rotateNinety';
+    }
+    randomRecipeCardFront.appendChild(randomRecipeImage);
+    const randomRecipeName = document.getElementById('random-recipe-name');
+    randomRecipeName.innerHTML = `<h1>${randomRecipe.name}</h1>`
+    const randomRecipeInformation = document.getElementById('random-recipe-information');
+    randomRecipeInformation.innerHTML = `<h1>${randomRecipe.ingredients}</h1>`
     console.log(randomRecipe.name);
-    //toggle display of this form and populate it with the object returned from the recipes array
 }
 
 
