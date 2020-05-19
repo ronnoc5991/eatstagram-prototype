@@ -20,6 +20,24 @@ body {
     min-height: 100vh;
 }
 
+button {
+  all: unset;
+  border-radius: 5px;
+  border: 5px solid var(--red);
+  cursor: pointer;
+  color: var(--red);
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 85%;
+  text-align: center;
+  background-color: white;
+}
+
+button:hover {
+  transform: scale(1.01);
+}
+
 #navBar {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -76,21 +94,20 @@ body {
   grid-template-rows: 250px 500px;
 }
 
+/* ------------------------------------ Random Recipe Display ------------------------------------ */
+
 #randomRecipeDisplay {
   position: absolute;
   background-color: transparent;
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 4fr;
+  grid-template-rows: 1fr 4fr 1fr;
 }
 
 #random-recipe-title {
   grid-row-start: 1;
   grid-row-end: 2;
-  grid-column-start: 1;
-  grid-column-end: 3;
   margin: auto;
 }
 
@@ -98,19 +115,52 @@ body {
   font-size: 50px;
 }
 
-#random-recipe-display-card {
+#random-recipe-display-container{
   grid-row-start: 2;
   grid-row-end: 3;
-  grid-column-start: 1;
-  grid-column-end: 2;
+  display: flex;
+  position: relative;
 }
 
-#random-recipe-information {
-  grid-row-start: 2;
-  grid-row-end: 3;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  margin-top: 150px;
+#front-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+#back-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#random-recipe-display-card-front {
+  margin: auto;
+  transform: translate(-70%);
+}
+
+#random-recipe-display-card-back {
+  margin: auto;
+  transform: translateX(70%);
+}
+
+#random-recipe-back {
+  text-align: center;
+}
+
+#random-display-button-container {
+  grid-row-start: 3;
+  grid-row-end: 4;
+  display: flex;
+}
+
+#another-random-recipe-button {
+  margin: auto;
+}
+
+#exit-random-recipe-button {
+  margin: auto;
 }
 
 .hidden {
@@ -317,19 +367,30 @@ body {
 
         <div id="random-recipe-title"><h1>You should eat...</h1></div>
 
-        <div class="display-card-demo" id="random-recipe-display-card">
-          <div class="display-card-front-demo" id="random-recipe-front">
-            <img id="random-recipe-image" alt=""> 
-            <div class="front-text-demo" id="random-recipe-name"></div>
+        <div id="random-recipe-display-container">
+          <div id="front-container">
+            <div class="display-card-demo" id="random-recipe-display-card-front">
+              <div class="display-card-front-demo" id="random-recipe-front">
+                <img id="random-recipe-image" alt=""> 
+                <div class="front-text-demo" id="random-recipe-name"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="back-container">
+            <div class="display-card-demo" id="random-recipe-display-card-back">
+              <div class="display-card-back-demo" id="random-recipe-back"></div>
+            </div>
           </div>
         </div>
-
-        <div id="random-recipe-information"></div>
-
+        <div id="random-display-button-container">
+          <button id="another-random-recipe-button">Hmmmm... Got any other ideas?</button>
+          <button id="exit-random-recipe-button">Great! Thanks!</button>
+        </div>
+        
       </div>
 
 
-      <!-- think about putting these into another div -->
       <div id="cardDisplayContainer">
 
       </div>

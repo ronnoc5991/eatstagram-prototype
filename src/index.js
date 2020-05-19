@@ -8,12 +8,16 @@ const newCardButton = document.getElementById("newCard");
 newCardButton.addEventListener('click', toggleFormDisplay);
 const randomCardContainer = document.getElementById("randomRecipeDisplay");
 const randomCardButton = document.getElementById("randomCard");
-randomCardButton.addEventListener('click', displayRandomCard);
+randomCardButton.addEventListener('click', toggleRandomDisplay);
+const anotherRandomRecipeButton = document.getElementById("another-random-recipe-button");
+anotherRandomRecipeButton.addEventListener('click', displayRandomCard);
+const exitRandomRecipeDisplay = document.getElementById("exit-random-recipe-button");
+exitRandomRecipeDisplay.addEventListener('click', toggleRandomDisplay);
 
 const recipes = [];
 
 function toggleFormDisplay() {
-    randomCardContainer.className = "hidden";
+    randomCardContainer.className = "hidden"; //hide other container
     if (formContainer.className == "hidden") { //if hidden, make active
         cardDisplayContainer.style.opacity = "0.2";
         formContainer.className = "active";
@@ -32,8 +36,8 @@ function loadRecipeDisplay () {
     //need to remove them before attaching new recipe?
 }
 
-function displayRandomCard () {
-    formContainer.className = "hidden";
+function toggleRandomDisplay () {
+    formContainer.className = "hidden"; //hide other container
     if (randomCardContainer.className === "hidden") {
         cardDisplayContainer.style.opacity = "0.2";
         randomCardContainer.className = "active";
@@ -41,7 +45,11 @@ function displayRandomCard () {
         cardDisplayContainer.style.opacity = "1";
         randomCardContainer.className = "hidden";
     }
-    var randomRecipe = _.sample(recipes);
+    displayRandomCard();
+}
+
+function displayRandomCard () {
+    var randomRecipe = _.sample(recipes); //get random Recipe
     const randomRecipeCardFront = document.getElementById("random-recipe-front");
     const randomRecipeImage = document.getElementById('random-recipe-image')
     randomRecipeImage.src = `${randomRecipe.imageLink}`;
@@ -57,8 +65,8 @@ function displayRandomCard () {
     randomRecipeCardFront.appendChild(randomRecipeImage);
     const randomRecipeName = document.getElementById('random-recipe-name');
     randomRecipeName.innerHTML = `<h1>${randomRecipe.name}</h1>`
-    const randomRecipeInformation = document.getElementById('random-recipe-information');
-    randomRecipeInformation.innerHTML = `<h1>${randomRecipe.ingredients}</h1>`
+    const randomRecipeCardBack = document.getElementById("random-recipe-back");
+    randomRecipeCardBack.innerHTML = `<h1>${randomRecipe.name}</h1> <p>Ingredients</p> <p>${randomRecipe.ingredients}</p>`
     console.log(randomRecipe.name);
 }
 
@@ -105,9 +113,13 @@ recipes.push(newRecipe);
 loadRecipeDisplay();
 
 
-
 //needs an add recipe form that can take photos
-//needs a random recipe feature that pulls up a random recipe
 //how does it pull it up?  Can you click on a photo to make it larger?
 //can we add several photos and scroll through them?
 //tag features like a blog?  tag by lunch/dinner/italian/soup/vegetables etc.
+//make different display options... one should be grid display... other should be photo carousel
+
+//add development of polaroid picture effect... fade from black or purple?
+//on random recipe load... random polaroid should appear in the middle... and split into front and back on the left and right of screen
+//add slide left and flip right classes/animations to the random card display
+//photots are not equal on the y plane right now... fix this
